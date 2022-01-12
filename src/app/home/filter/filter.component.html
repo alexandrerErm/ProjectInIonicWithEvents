@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filters</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()"
+        ><ion-icon name="close"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-radio-group
+          value="{{ searchFilter }}"
+          (ionChange)="titleCheckedChange($event)"
+        >
+          <ion-list-header>
+            <ion-label><b>Search By:</b></ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Event Title</ion-label>
+            <ion-radio slot="start" value="Events Title"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Speakers</ion-label>
+            <ion-radio slot="start" value="Speakers"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-radio slot="start" value="Date"></ion-radio>
+          </ion-item>
+
+          <ion-list-header *ngIf="dateFilter">
+            <ion-label><b>Select Date:</b></ion-label>
+          </ion-list-header>
+
+          <ion-item *ngIf="dateFilter">
+            <ion-label>From: </ion-label>
+            <ion-datetime
+              (ionChange)="onchangeStartDate($event)"
+              isplayFormat="YYYY-MM-DD"
+              placeholder="{{startDate ? startDate : 'Select Date'}}"
+              value = "startDate"
+            ></ion-datetime>
+          </ion-item>
+
+          <ion-item *ngIf="dateFilter">
+            <ion-label>End: </ion-label>
+            <ion-datetime
+              isplayFormat="YYYY-MM-DD"
+              (ionChange)="onchangeEndDate($event)"
+              placeholder="{{endDate ? endDate : 'Select Date'}}"
+            ></ion-datetime>
+          </ion-item>
+        </ion-radio-group>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

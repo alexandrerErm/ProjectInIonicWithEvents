@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'Settings.Title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title *ngIf="user"><h1>{{ 'Settings.Personal' | translate }}</h1></ion-title>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngIf="user">
+            <ion-label position="floating">
+              <ion-icon name="person-outline"></ion-icon>
+              {{ 'Settings.Name' | translate }}</ion-label
+            >
+            <ion-input
+              id="nameInput"
+              ngModel
+              type="text"
+              name="name"
+              required
+              #nameCtrl="ngModel"
+              placeholder="{{user.username}}"
+            >
+            </ion-input>
+            <p *ngIf="!nameCtrl.valid && nameCtrl.touched" lines="none">
+              {{ 'Settings.Error' | translate }}
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngIf="user">
+          <ion-label position="floating">
+            <ion-icon name="key-outline"></ion-icon>
+            {{ 'Settings.NewPassword' | translate }}</ion-label
+          >
+          <ion-input
+            id="passwordInput"
+            ngModel
+            type="password"
+            name="password"
+            required
+            #passwordCtrl="ngModel"
+          >
+          </ion-input>
+          <p *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
+            {{ 'Settings.Error2' | translate }}
+          </p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngIf="user">
+          <ion-label position="floating">
+            <ion-icon name="key-outline"></ion-icon>
+            {{ 'Settings.ConfirmPassword' | translate }}</ion-label
+          >
+          <ion-input
+            id="confirmPasswordInput"
+            ngModel
+            type="password"
+            name="confirmPassword"
+            required
+            #confirmPasswordCtrl="ngModel"
+          >
+          </ion-input>
+          <p *ngIf="!confirmPasswordCtrl.valid && confirmPasswordCtrl.touched" lines="none">
+            {{ 'Settings.Error2' | translate }}
+          </p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="user">
+      <ion-col class="ion-text-center">
+        <ion-button type="submit">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label>{{ 'Settings.ChangeLang' | translate }}</ion-label>
+      <!-- value="{{ lang === 'en' ? 'en' : 'gr' }}" -->
+      <ion-select class="custom-select" #langSelect (ionChange)="changeLang($event)" value="{{ lang }}">
+        <ion-select-option value="gr" >{{ 'Settings.Greek' | translate }}</ion-select-option>
+        <ion-select-option value="en" >{{ 'Settings.English' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+</ion-content>

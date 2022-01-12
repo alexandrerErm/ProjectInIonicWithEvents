@@ -1,0 +1,236 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="isSignUpMode">{{ 'auth.Login' | translate }}</ion-title>
+    <ion-title *ngIf="!isSignUpMode">{{ 'auth.SignUp' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openLanguagePopover($event)">
+        <ion-icon name="language-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="loginPage" padding>
+  <ion-grid>
+    <ion-row>
+      <img
+        id="login-logo"
+        class="center"
+        src="https://codesign.com.bd/conversations/content/images/2020/03/Sprint-logo-design-Codesign-agency.png"
+      />
+    </ion-row>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="mail-outline"></ion-icon>
+                Email</ion-label
+              >
+              <ion-input
+                id="emailInput"
+                type="email"
+                ngModel
+                name="email"
+                required
+                email
+                #emailCtrl="ngModel"
+              >
+              </ion-input>
+              <p *ngIf="!emailCtrl.valid && emailCtrl.touched" lines="none">
+                Should be a valid email address
+              </p>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                <ion-icon name="person-outline"></ion-icon>
+                {{ 'auth.Username' | translate }}</ion-label
+              >
+              <ion-input
+                id="usernameInput"
+                type="text"
+                ngModel
+                name="username"
+                required
+                #userNameCtrl="ngModel"
+              >
+              </ion-input>
+              <p id="nameExist" *ngIf="nameExist && isSignUpMode">
+                The username is already exists !!!!
+              </p>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                {{ 'auth.Password' | translate }}</ion-label
+              >
+              <ion-input
+                id="passwordInput"
+                type="password"
+                ngModel
+                name="password"
+                required
+                minlength="6"
+                #passwordCtrl="ngModel"
+              >
+              </ion-input>
+              <p
+                *ngIf="!passwordCtrl.valid && passwordCtrl.touched"
+                lines="none"
+              >
+                The password must contain more than 6 characters!!!
+              </p>
+            </ion-item>
+            <p id="notValid" *ngIf="loginFail && !isSignUpMode">
+              The username or the password is not valid!!!!
+            </p>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                {{ 'Settings.ConfirmPassword' | translate }}</ion-label
+              >
+              <ion-input
+                type="password"
+                ngModel
+                name="confirmPassword"
+                required
+                minlength="6"
+                #confirmPasswordCtrl="ngModel"
+              >
+              </ion-input>
+            </ion-item>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="person-outline"></ion-icon>
+                {{ 'Settings.Name' | translate }}</ion-label
+              >
+              <ion-input
+                type="text"
+                ngModel
+                name="name"
+                required
+                #nameCtrl="ngModel"
+              >
+              </ion-input>
+              <p *ngIf="!nameCtrl.valid && nameCtrl.touched" lines="none">
+                You have to enter your name !!!
+              </p>
+            </ion-item>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="person-outline"></ion-icon>
+                {{ 'auth.LastName' | translate }}</ion-label
+              >
+              <ion-input
+                type="text"
+                ngModel
+                name="lastName"
+                required
+                #lastNameCtrl="ngModel"
+              >
+              </ion-input>
+              <p
+                *ngIf="!lastNameCtrl.valid && lastNameCtrl.touched"
+                lines="none"
+              >
+                You have to enter your last name !!!
+              </p>
+            </ion-item>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="hammer-outline"></ion-icon>
+                {{ 'auth.Profession' | translate }}</ion-label
+              >
+              <ion-input
+                type="text"
+                ngModel
+                name="professin"
+                required
+                #professionCtrl="ngModel"
+              >
+              </ion-input>
+              <p
+                *ngIf="!professionCtrl.valid && professionCtrl.touched"
+                lines="none"
+              >
+                You have to enter your profession !!!
+              </p>
+            </ion-item>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="call-outline"></ion-icon>
+                {{ 'auth.Phone' | translate }}</ion-label
+              >
+              <ion-input
+                type="number"
+                ngModel
+                name="number"
+                required
+                #numberCtrl="ngModel"
+                minlength="10"
+                maxlength="10"
+              >
+              </ion-input>
+              <p *ngIf="!numberCtrl.valid && numberCtrl.touched" lines="none">
+                The number is not valid !!!
+              </p>
+            </ion-item>
+            <ion-item *ngIf="isSignUpMode">
+              <ion-label position="floating">
+                <ion-icon name="business-outline"></ion-icon>
+                {{ 'auth.Company' | translate }}</ion-label
+              >
+              <ion-input
+                type="text"
+                ngModel
+                name="company"
+                #companyCtrl="ngModel"
+              >
+              </ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-button
+            type="submit"
+            color="primary"
+            expand="block"
+            [disabled]="!f.valid"
+            *ngIf="isSignUpMode"
+          >
+            {{ 'auth.Login' | translate }}
+          </ion-button>
+          <ion-button
+            type="submit"
+            color="primary"
+            expand="block"
+            [disabled]="!f.valid"
+            *ngIf="!isSignUpMode"
+          >
+            {{ 'auth.Login' | translate }}
+          </ion-button>
+          <ion-button (click)="login()" expand="block"
+            >{{ 'auth.NoAccount' | translate }}</ion-button
+          >
+          <br />
+          <div style="text-align: center">
+            <!-- <a [routerLink]="['/auth']" (click)="onSwitchMode(f)"
+              >Switch to {{ isSignUpMode ? 'Login' : 'Sign-Up'}}</a
+            > -->
+            <a
+              [routerLink]="['/auth']"
+              (click)="onSwitchMode(f)"
+              *ngIf="isSignUpMode"
+              >{{ 'auth.SwitchTo' | translate }} {{ 'auth.Login' | translate }}</a
+            >
+            <a
+              [routerLink]="['/auth']"
+              (click)="onSwitchMode(f)"
+              *ngIf="!isSignUpMode"
+              >{{ 'auth.SwitchTo' | translate }} {{ 'auth.SignUp' | translate }}</a
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

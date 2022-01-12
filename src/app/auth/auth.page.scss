@@ -1,0 +1,27 @@
+#login-logo {
+  width: 12vh;
+  border-radius: 60%;
+  border: 1px solid rgb(209, 198, 241);
+  box-shadow: 10px 10px 5px #ccc;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#notValid,
+#nameExist {
+  color: red;
+}
+
+ion-content {
+  --ion-background-color: rgb(241, 255, 254);
+}
+
+ion-icon {
+  vertical-align: middle;
+  font-size: 2.5vh;
+}

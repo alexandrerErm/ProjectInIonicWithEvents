@@ -1,0 +1,43 @@
+{
+  "auth":{
+    "Login":"Login",
+    "Username":"Username",
+    "Password":"Password",
+    "NoAccount":"Continue Without Account",
+    "SwitchTo": "Switch To",
+    "SignUp": "Sign-Up",
+    "LastName": "Last-Name",
+    "Profession": "Profession",
+    "Phone":"Phone",
+    "Company":"Company"
+  },
+
+  "barMenu":{
+    "Menu":"Menu",
+    "LoveEvents": "Love-Events",
+    "PaidEvents": "Paid-Events",
+    "FreeEvents": "Free-Events",
+    "Settings": "Settings",
+    "Logout": "Logout"
+  },
+
+  "home":{
+    "Title": "Home",
+    "Search": "Search by",
+    "noAccount": "Dont have account ?"
+  },
+
+  "Settings":{
+    "Title": "Settings",
+    "Personal": "Change personal data",
+    "Name": "Name",
+    "Error": "Should be a valid name!!!",
+    "NewPassword": "New-Password",
+    "ConfirmPassword": "Confirm-Password",
+    "Error2": "The password must contain more than 6 characters!!!",
+    "ChangeLang": "Change Language",
+    "Greek": "Greek",
+    "English": "English"
+  }
+
+}

@@ -1,3 +1,45 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title> {{ 'barMenu.Menu' | translate }} </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item *ngIf="user" lines="none" routerLink="/home/love-list">
+            <ion-icon name="heart-outline"></ion-icon>
+            <ion-label>{{ 'barMenu.LoveEvents' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item *ngIf="user" lines="none" routerLink="/home/paid-events">
+            <ion-icon name="cash-outline"></ion-icon>
+            <ion-label>{{ 'barMenu.PaidEvents' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item *ngIf="user" lines="none" routerLink="/home/free-events">
+            <ion-icon name="lock-open-outline"></ion-icon>
+            <ion-label>{{ 'barMenu.FreeEvents' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/home/settings">
+            <ion-icon name="settings-outline"></ion-icon>
+            <ion-label>{{ 'barMenu.Settings' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none">
+            <ion-icon name="exit"></ion-icon>
+            <ion-label (click)="onLogout()">{{ 'barMenu.Logout' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>

@@ -1,20 +1,84 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" >
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon
+        (click)="filterModal()"
+        name="filter-circle-outline"
+        style="font-size: 4vh"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ 'home.Title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <ion-searchbar
+          placeholder="{{ 'home.Search' | translate }} {{  titleFilter ? 'Event-Title' : 'Speaker-Name' }}"
+          searchIcon
+          (ionChange)="ionChange($event)"
+        >
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col class="ion-text-center" >
+        <ion-spinner color="primary"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <div *ngIf="titleFilter">
+          <ion-list *ngFor="let event of events">
+            <ion-item-sliding>
+              <ion-item
+                [routerLink]="['event',event.title]"
+                style="cursor: pointer"
+              >
+                <ion-thumbnail slot="start">
+                  <ion-img [src]="event.logo"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <h1>{{ event.title }}</h1>
+                  <h3>{{ event.description }}</h3>
+                </ion-label>
+              </ion-item>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+        <div *ngIf="!titleFilter">
+          <ion-list *ngFor="let speaker of speakers">
+            <ion-item-sliding>
+              <ion-item
+                [routerLink]="['speaker',speaker.id]"
+                style="cursor: pointer"
+              >
+                <ion-thumbnail slot="start">
+                  <ion-img [src]="speaker.image"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                  <h1>{{ speaker.name }}</h1>
+                  <h3>{{ speaker.biography }}</h3>
+                </ion-label>
+              </ion-item>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <a *ngIf = "!user" style="cursor: pointer;" (click) = "signUp()">{{ 'home.noAccount' | translate }}</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
